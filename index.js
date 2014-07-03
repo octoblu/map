@@ -1,3 +1,5 @@
+// CONSUMER_KEY=ynsILp4v6EqLOBVldue48Q CONSUMER_SECRET=RauLLXfSB7P5Y7jUCXmwxWOFylSq0IxYhgApMjDa3W0 ACCESS_TOKEN=13604142-dNeWwowlOqBeTeFIOV6kJB5Yyj3lXQxnHofXTkTNM ACCESS_TOKEN_SECRET=RhoiBU2037meC1Ecqsnc4FAOr96l1bgwSFpbvMkTFgo node index.js
+
 var Twit = require('twit');
 var express = require('express');
 var app = express();
@@ -14,7 +16,7 @@ var T = new Twit({
 
 io.set('heartbeat timeout', 10);
 
-var query = 'world cup';
+var query = 'happy';
 
 var stream = T.stream('statuses/filter', {
     track: query

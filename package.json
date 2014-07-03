@@ -1,7 +1,7 @@
 {
-  "name": "worldcup-twitter-map",
+  "name": "skynet-map",
   "version": "0.0.1",
-  "description": "Realtime World Cup Twitter map",
+  "description": "Realtime SkyNet activity map",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

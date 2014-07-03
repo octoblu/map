@@ -1,8 +1,4 @@
-### Realtime World Cup Twitter Map
-
-[View](http://fierce-anchorage-9390.herokuapp.com/)
-
-[![](https://i.cloudup.com/s1l2i08hGc.png)](http://fierce-anchorage-9390.herokuapp.com/)
+### Realtime SkyNet Activity Map
 
 Install:
 
