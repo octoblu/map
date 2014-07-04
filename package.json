@@ -9,8 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "twit": "~1.1.15",
     "express": "~4.4.1",
-    "socket.io": "~1.0.4"
+    "geoip-lite": "*"
   }
 }

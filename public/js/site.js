@@ -1,4 +1,40 @@
-var socket = io();
+var skynetConfig = {
+  "uuid": "c33e14c0-fd55-11e3-a290-ef9910e207d9",
+  "token": "0avr9lpll33w0cnmirsghi79omie8kt9",
+  "protocol": "websocket",
+  "host": "127.0.0.1", // optional (defaults to "http://skynet.im")
+  "port": 3000 // optional (defaults to 80)
+}
+skynet(skynetConfig, function (e, socket, device) {
+  if (e) throw e
+
+    console.log('connected to skynet');
+
+  // Subscribe to SkyNet.im messages and events
+  socket.emit('subscribe', {
+    "uuid": "530ec7a1-02f8-11e4-a1b9-fd8f2922fbb0"
+  }, function (data) {
+    console.log(data);
+  });
+
+  socket.on('message', function(message){
+    console.log('message received', message);
+
+    $.ajax({
+      url: "/geo/" + message.payload.ipAddress,
+      cache: false
+    })
+      .done(function( data ) {
+        console.log('geo', data);
+        formatData(data);
+      });
+
+    
+  });
+
+});
+
+
 var map = L.mapbox.map('map', 'chrismatthieu.im763216', {
     tileLayer: {
         detectRetina: true
@@ -6,8 +42,8 @@ var map = L.mapbox.map('map', 'chrismatthieu.im763216', {
 })
     .setView([0, 0], 2);
 
-function formatData(tweet) {
-    var marker = L.marker([tweet.geo.coordinates[0], tweet.geo.coordinates[1]], {
+function formatData(geo) {
+    var marker = L.marker([geo[0], geo[1]], {
         icon: L.icon({
             iconUrl: 'http://octoblu-devices.s3.amazonaws.com/skynetpin.png'
         })
@@ -33,8 +69,3 @@ function formatData(tweet) {
 
     $('.loading').fadeOut();
 }
-
-socket.on('tweeted', function(tweet) {
-    console.log(tweet);
-    formatData(tweet);
-});

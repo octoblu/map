@@ -2,11 +2,12 @@
 <html>
 
 <head>
-  <title>IoT Tweets</title>
+  <title>SkyNet Activity</title>
   <link rel='stylesheet' href='https://www.mapbox.com/base/latest/base.css'>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet' />
+  <script src='http://localhost:3000/js/skynet.js'></script>
   <style>
   body { margin:0; padding:0; }
   #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -28,11 +29,10 @@
   <div id='map'></div>
   <div class='pin-right pad1'>
     <div class='fill-dark dark pad2 clearfix round keyline-all'>
-      <h3 class='space-bottom'>Realtime Geolocated SkyNet tweets</h3>
+      <h3 class='space-bottom'>SkyNet Activity</h3>
       <!-- <a href='https://github.com/rsudekum/worldcup-tweet-map' class='small icon github fr'>Fork me on GitHub</a> -->
     </div>
   </div>
-  <script src='/socket.io/socket.io.js'></script>
   <script src='../js/masonry.js'></script>
   <script src='//code.jquery.com/jquery-1.11.1.js'></script>
   <script src='../js/timeago.js'></script>
