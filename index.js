@@ -8,10 +8,14 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/geo/:ip', function(req, res) {
   var ip = req.params.ip;
-  ip = '174.26.219.34';
+  // ip = '174.26.219.34';
   console.log('IP', ip);
-  var geo = geoip.lookup(ip);
-  res.json(geo.ll);
+  if(ip != undefined){
+    var geo = geoip.lookup(ip);
+    if(geo){
+      res.json(geo.ll);
+    }
+  }
 });
 
 http.listen(port, function() {
