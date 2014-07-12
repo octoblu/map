@@ -49,7 +49,8 @@ var map = L.mapbox.map('map', 'chrismatthieu.im763216', {
 function formatData(geo) {
     var marker = L.marker([geo[0], geo[1]], {
         icon: L.icon({
-            iconUrl: 'http://octoblu-devices.s3.amazonaws.com/skynetpin.png'
+            // iconUrl: 'http://octoblu-devices.s3.amazonaws.com/skynetpin.png'
+            iconUrl: 'http://octoblu-devices.s3.amazonaws.com/octoblupin25.png'
         })
     })
         // .bindPopup('<div class="pad1 round clip tile fl">' +
