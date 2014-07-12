@@ -19,7 +19,7 @@ conn.on('ready', function(data){
     "uuid": "4c750541-0608-11e4-ab3f-b15969385230"
   }, function (data) {
     console.log(data);
-  });  
+  });
 
   conn.on('message', function(message){
     console.log('message received', message);
@@ -33,7 +33,7 @@ conn.on('ready', function(data){
         console.log('geo', data);
         formatData(data);
       });
-    
+
   });
 
 });
@@ -49,8 +49,9 @@ var map = L.mapbox.map('map', 'chrismatthieu.im763216', {
 function formatData(geo) {
     var marker = L.marker([geo[0], geo[1]], {
         icon: L.icon({
-            // iconUrl: 'http://octoblu-devices.s3.amazonaws.com/skynetpin.png'
-            iconUrl: 'http://octoblu-devices.s3.amazonaws.com/octoblupin25.png'
+            iconUrl: 'http://octoblu-devices.s3.amazonaws.com/octoblupin25.png',
+            iconSize: ['25', '25'],
+            iconAnchor: ['25', '12']
         })
     })
         // .bindPopup('<div class="pad1 round clip tile fl">' +
@@ -66,7 +67,7 @@ function formatData(geo) {
         //     '</div>' + '')
         .addTo(map);
 
-    setTimeout(function(){map.removeLayer(marker);}, 1000);             
+    setTimeout(function(){map.removeLayer(marker);}, 1000);
 
     // marker.on('popupopen', function() {
     //     $('.timeago').timeago();
