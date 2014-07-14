@@ -52,8 +52,8 @@ function formatData(geo) {
             iconUrl: 'http://octoblu-devices.s3.amazonaws.com/octoblupin25.png',
             iconSize: ['25', '25'],
             iconAnchor: ['12', '12']
-        });
-    });
+        })
+    })
         // .bindPopup('<div class="pad1 round clip tile fl">' +
         //         '<img src="' + tweet.user.profile_image_url_https + '" class="round" height="50px" width="50px" />' +
         //         '<p class="small fr col9 white">' +
