@@ -35,6 +35,14 @@ var map = L.mapbox.map('map', 'chrismatthieu.im763216', {
 
 
 function formatData(data) {
+   var activity = '<span class="display-block small">' +
+                    '<span class="white inline">' + data.topic + '</span>' +
+                    '<span class="quiet inline"> @' + data.type + '</span>' +
+                '</span>' +
+                data.geo.city + ' ' +
+                data.geo.region + ' ' +
+                data.geo.country
+    $("#activityData").prepend(activity);
 
     var marker = L.marker([data.geo.ll[0], data.geo.ll[1]], {
         icon: L.icon({
