@@ -43,7 +43,16 @@ function formatData(data) {
             '</div>' + '')
         .addTo(map);
 
-        marker.openPopup();
+        // marker.openPopup();
+
+        activity = '<span class="display-block small">' +
+                        '<span class="white inline">' + data.topic + '</span>' +
+                        '<span class="quiet inline"> @' + data.type + '</span>' +
+                    '</span>' +
+                    data.geo.city + ' ' +
+                    data.geo.region + ' ' +
+                    data.geo.country 
+        $("#activityData").prepend(activity);     
 
     setTimeout(function(){map.removeLayer(marker);}, 1000);
 
