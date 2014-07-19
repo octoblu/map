@@ -1,5 +1,5 @@
 (function(){
-    var ws, map, formatData, formatLocation, formatPopupHTML,
+    var ws, map, processMessage, formatLocation, formatPopupHTML,
         addActivityToSidebar, showFromPopUp, showToPopUp, showFromToLine, HIDE_DELAY;
 
     // How long to show an icon, popup, line before it disappears (in ms)
@@ -16,9 +16,12 @@
             console.log('JSONParseError:', evt.data);
         }
 
-        if(data.geo){
-            formatData(data);
+        try {
+            processMessage(data);
+        } catch(ex) {
+            console.log('Error displaying data', data);
         }
+
         console.log('evt', data);
     };
 
@@ -29,7 +32,9 @@
     }).setView([0, 0], 3);
 
 
-    formatData = function(data) {
+    processMessage = function(data) {
+        if(!data.geo){return;}
+
         addActivityToSidebar(data);
         showFromPopUp(data);
 
