@@ -48,6 +48,11 @@
 
     addActivityToSidebar = function(data) {
         $("#activityData").prepend(formatActivityHTML(data));
+
+        // remove activity from bottom
+        if($("#activityData > div").length > 15){
+            $("#activityData div:last-child").remove();
+        }
     };
 
     showFromPopUp = function(data) {
@@ -111,10 +116,11 @@
     };
 
     formatActivityHTML = function(data){
-        return  '<span class="display-block small">' +
-                    '<span class="white inline">' + data.topic + '</span>' +
+        return  '<div class="display-block small ">' +
+                    '<span class="white inline">' + data.topic + '</span> - ' +
                     '<span class="quiet inline"> @' + data.type + '</span>' +
-                '</span>' + formatLocation(data.geo);
+                    '<br/>' + formatLocation(data.geo) +
+                '</div>';
     };
 
     formatPopupHTML = function(data, geo, info){
