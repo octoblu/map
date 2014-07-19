@@ -34,6 +34,19 @@ var map = L.mapbox.map('map', 'chrismatthieu.im763216', {
     .setView([0, 0], 3);
 
 
+function updateSidebar(data)
+{
+    activity = '<span class="display-block small">' +
+        '<span class="white inline">' + data.topic + '</span>' +
+        '<span class="quiet inline"> @' + data.type + '</span>' +
+        '</span>' +
+        data.geo.city + ' ' +
+        data.geo.region + ' ' +
+        data.geo.country
+    $("#activityData").prepend(activity);
+
+}
+
 function formatData(data) {
 
     var marker = L.marker([data.geo.ll[0], data.geo.ll[1]], {
@@ -56,6 +69,8 @@ function formatData(data) {
             data.geo.country + ' ' +
             '</p>' +
             '</div>' + '');
+
+
 
     if (data.toGeo) {
         var destMarker = L.marker([data.toGeo.ll[0], data.toGeo.ll[1]], {
@@ -88,6 +103,7 @@ function formatData(data) {
 
     map.addLayer(marker);
     map.addLayer(fromPopUp);
+    updateSidebar(data);
 
     setTimeout(function(){map.removeLayer(marker);}, 1000);
     setTimeout(function(){map.removeLayer(fromPopUp);}, 1000);
