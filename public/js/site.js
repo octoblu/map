@@ -1,6 +1,6 @@
 (function(){
     var ws, map, formatData, formatLocation, formatPopupHTML,
-        addActivityToSidebar, showFromPopUp, showToPopUp, HIDE_DELAY;
+        addActivityToSidebar, showFromPopUp, showToPopUp, showFromToLine, HIDE_DELAY;
 
     // How long to show an icon, popup, line before it disappears (in ms)
     HIDE_DELAY = 1000;
@@ -32,20 +32,17 @@
     formatData = function(data) {
         addActivityToSidebar(data);
         showFromPopUp(data);
-        showToPopUp(data);
+
+        if(data.toGeo) {
+            showToPopUp(data);
+            showFromToLine(data.geo, data.toGeo);
+        }
 
         $('.loading').fadeOut();
     };
 
     addActivityToSidebar = function(data) {
-        var activityHTML;
-
-        activityHTML =  '<span class="display-block small">' +
-                            '<span class="white inline">' + data.topic + '</span>' +
-                            '<span class="quiet inline"> @' + data.type + '</span>' +
-                        '</span>' + formatLocation(data.geo);
-
-        $("#activityData").prepend(activityHTML);
+        $("#activityData").prepend(formatActivityHTML(data));
     };
 
     showFromPopUp = function(data) {
@@ -66,9 +63,6 @@
 
     showToPopUp = function(data) {
         var marker, popup, line;
-        if (!data.toGeo) {
-            return;
-        }
 
         marker = buildMarker(data.toGeo);
 
@@ -76,21 +70,22 @@
         popup.setLatLng(L.latLng(data.toGeo.ll[0], data.toGeo.ll[1]));
         popup.setContent(formatPopupHTML(data, data.toGeo, 'Destination'));
 
-        var line = L.polyline([L.latLng(data.geo.ll[0], data.geo.ll[1]), L.latLng(data.toGeo.ll[0], data.toGeo.ll[1])], {color: 'blue'});
+        map.addLayer(marker);
+        map.addLayer(popup);
 
+        setTimeout(function(){map.removeLayer(marker);}, HIDE_DELAY);
+        setTimeout(function(){map.removeLayer(popup);},  HIDE_DELAY);
+    };
+
+    showFromToLine = function(fromGeo, toGeo){
+        var line = L.polyline([L.latLng(fromGeo.ll[0], fromGeo.ll[1]), L.latLng(toGeo.ll[0], toGeo.ll[1])], {color: 'blue'});
         map.addLayer(line);
-
         /* Maybe there is a better way to focus the view,
          panInsideBounds will move the map from one place to another
          if there is high activity */
         map.panInsideBounds(line.getBounds());
-
-        map.addLayer(marker);
-        map.addLayer(popup);
         setTimeout(function(){map.removeLayer(line);},   HIDE_DELAY);
-        setTimeout(function(){map.removeLayer(marker);}, HIDE_DELAY);
-        setTimeout(function(){map.removeLayer(popup);},  HIDE_DELAY);
-    }
+    };
 
     buildMarker = function(geo) {
         return L.marker([geo.ll[0], geo.ll[1]], {
@@ -108,6 +103,13 @@
            geo.region,
            geo.country
         ].join(' ');
+    };
+
+    formatActivityHTML = function(data){
+        return  '<span class="display-block small">' +
+                    '<span class="white inline">' + data.topic + '</span>' +
+                    '<span class="quiet inline"> @' + data.type + '</span>' +
+                '</span>' + formatLocation(data.geo);
     };
 
     formatPopupHTML = function(data, geo, info){
