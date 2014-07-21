@@ -3,7 +3,7 @@
         addActivityToSidebar, showFromPopUp, showToPopUp, showFromToLine, HIDE_DELAY;
 
     // How long to show an icon, popup, line before it disappears (in ms)
-    HIDE_DELAY = 1000;
+    HIDE_DELAY = 2000;
 
     ws = new WebSocket('ws://54.191.102.104');
 
@@ -93,7 +93,7 @@
         /* Maybe there is a better way to focus the view,
          panInsideBounds will move the map from one place to another
          if there is high activity */
-        map.panInsideBounds(line.getBounds());
+        // map.panInsideBounds(line.getBounds());
         setTimeout(function(){map.removeLayer(line);},   HIDE_DELAY);
     };
 
