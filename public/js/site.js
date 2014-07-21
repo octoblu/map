@@ -29,7 +29,7 @@
         tileLayer: {
             detectRetina: true
         }
-    }).setView([0, 0], 3);
+    }).setView([0, 0], 5);
 
 
     processMessage = function(data) {
