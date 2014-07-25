@@ -21,6 +21,9 @@
     clear:both;
     visibility:hidden;
   }
+  @media screen and (max-width: 720px) {
+    .mobile-hide{ display: none; }
+  }  
   </style>
 </head>
 
@@ -28,7 +31,7 @@
   <div class='col12 center loading'></div>
   <div id='map'></div>
   <div class='pin-right pad1'>
-    <div class='fill-dark dark pad2 clearfix round keyline-all'>
+    <div class='fill-dark dark pad2 clearfix round keyline-all mobile-hide'>
       <h2 class='space-bottom'>Meshblu Activity</h3>
       <div id="activityData"></div>
     </div>
