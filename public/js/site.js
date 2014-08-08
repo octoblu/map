@@ -5,7 +5,7 @@
     // How long to show an icon, popup, line before it disappears (in ms)
     HIDE_DELAY = 2000;
 
-    ws = new WebSocket('ws://54.191.102.104');
+    ws = new WebSocket('ws://activity.octoblu.com');
 
     ws.onmessage = function(evt){
         var data;
